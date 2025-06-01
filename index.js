@@ -1,0 +1,12 @@
+import{S as p,a as f,i as l}from"./assets/vendor-B3Lscd_h.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function c(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(e){if(e.ep)return;e.ep=!0;const r=c(e);fetch(e.href,r)}})();const m=document.querySelector(".loader"),d=document.querySelector(".gallery");function g({webformatURL:n,largeImageURL:t,tags:c,likes:i,views:e,comments:r,downloads:o}){const h=c.split(",").slice(0,3).join(", ");return`<li>
+          <a href="${t}"><img src="${n}" alt="${h}" width="360" height="152" />
+          <div class="thumb">
+          <h2>Likes<span class="item-text">${i}</span></h2>
+          <h2>Views<span class="item-text">${e}</span></h2>
+          <h2>Comments<span class="item-text">${r}</span></h2>
+          <h2>Downloads<span class="item-text">${o}</span></h2>
+          </div>
+          </a>
+        </li>`}function y(n){return n.map(g).join(`
+`)}const L=new p(".gallery a",{captionDelay:250,captionsData:"alt",captions:!0});function b(){d.innerHTML=""}function S(n){const t=y(n);d.insertAdjacentHTML("afterbegin",t),L.refresh()}function w(){m.classList.remove("hidden")}function a(){m.classList.add("hidden")}const x="50463047-2395de4a1fa17e590ab2adb36",$="https://pixabay.com/api/";function v(n){const t=new URLSearchParams({key:x,q:n,image_type:"photo",orientation:"horizontal",safesearch:!0});return f.get(`${$}?${t}`)}let u=null;const s=document.querySelector(".form");s.addEventListener("submit",q);a();function q(n){n.preventDefault(),u=n.target.elements["search-text"].value.trim(),b(),w(),v(u).then(t=>{if(u===""){a(),l.warning({message:"Search field cannot be empty.",position:"topRight"}),s.reset();return}if(!t.data.hits||t.data.hits.length===0){a(),l.warning({message:"Sorry, there are no images matching your search query. Please try again!",color:"red",position:"topRight"}),s.reset();return}S(t.data.hits),a(),s.reset()}).catch(t=>{a(),l.error({message:"Something went wrong!!!",position:"topRight"})})}
+//# sourceMappingURL=index.js.map
