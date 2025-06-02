@@ -30,7 +30,7 @@ async function onSubmit(e) {
   showLoader();
   try {
     const res = await getImagesByQuery(query, currentPage);
-    maxPage = Math.ceil(res.data.totalHits / 15);
+    maxPage = Math.ceil(res.totalHits / 15);
     if (query === '') {
       hideLoader();
       iziToast.warning({
@@ -41,7 +41,7 @@ async function onSubmit(e) {
       form.reset();
       return;
     }
-    if (!res.data.hits || res.data.hits.length === 0) {
+    if (!res.hits || res.hits.length === 0) {
       hideLoader();
       iziToast.warning({
         message:
@@ -54,7 +54,7 @@ async function onSubmit(e) {
       return;
     }
 
-    createGallery(res.data.hits);
+    createGallery(res.hits);
     hideLoader();
     updateBtnStatus(currentPage, maxPage);
     form.reset();
@@ -73,7 +73,7 @@ async function onClick() {
     showLoader();
 
     const res = await getImagesByQuery(query, currentPage);
-    createGallery(res.data.hits);
+    createGallery(res.hits);
     hideLoader();
     window.scrollBy({
       top: document.querySelector('li').getBoundingClientRect().height * 3,

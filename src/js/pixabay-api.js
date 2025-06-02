@@ -13,5 +13,6 @@ export async function getImagesByQuery(query, page) {
     page: page,
     per_page: 15,
   });
-  return await axios.get(`${BASE_URL}?${params}`);
+  const res = await axios.get(`${BASE_URL}?${params}`);
+  return res.data;
 }
