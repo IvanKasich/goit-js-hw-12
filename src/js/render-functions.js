@@ -1,8 +1,12 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-const loader = document.querySelector('.loader');
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
+const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
+export const loadMore = document.querySelector('.load-more-btn');
+
 function imageTemplate({
   webformatURL,
   largeImageURL,
@@ -38,7 +42,7 @@ export function clearGallery() {
 }
 export function createGallery(images) {
   const markup = imagesTemplate(images);
-  gallery.insertAdjacentHTML('afterbegin', markup);
+  gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
 export function showLoader() {
@@ -46,4 +50,21 @@ export function showLoader() {
 }
 export function hideLoader() {
   loader.classList.add('hidden');
+}
+export function showLoadMore() {
+  loadMore.classList.remove('hidden');
+}
+export function hideLoadMore() {
+  loadMore.classList.add('hidden');
+}
+export function updateBtnStatus(currentPage, maxPage) {
+  if (currentPage < maxPage) {
+    showLoadMore();
+    return;
+  } else {
+    hideLoadMore();
+    iziToast.info({
+      message: `We're sorry, but you've reached the end of search results.`,
+    });
+  }
 }

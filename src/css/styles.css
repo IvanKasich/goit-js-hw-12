@@ -11,7 +11,7 @@
 @import url('./animations.css');
 
 .form {
-  margin: 36px auto 32px;
+  margin: 0 auto 32px;
   display: flex;
   gap: 8px;
   justify-content: center;
@@ -115,6 +115,7 @@ h2 {
 .loader {
   margin-right: auto;
   margin-left: auto;
+  margin-top: 32px;
   display: block;
   transform: rotateZ(45deg);
   perspective: 1000px;
@@ -190,4 +191,10 @@ h2 {
 }
 .hidden {
   display: none;
+}
+.load-more-btn {
+  width: 126px;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
 }
