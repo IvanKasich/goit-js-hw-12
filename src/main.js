@@ -29,8 +29,6 @@ async function onSubmit(e) {
   clearGallery();
   showLoader();
   try {
-    const res = await getImagesByQuery(query, currentPage);
-    maxPage = Math.ceil(res.totalHits / 15);
     if (query === '') {
       hideLoader();
       iziToast.warning({
@@ -41,6 +39,9 @@ async function onSubmit(e) {
       form.reset();
       return;
     }
+
+    const res = await getImagesByQuery(query, currentPage);
+    maxPage = Math.ceil(res.totalHits / 15);
     if (!res.hits || res.hits.length === 0) {
       hideLoader();
       iziToast.warning({
@@ -49,6 +50,7 @@ async function onSubmit(e) {
         color: 'red',
         position: 'topRight',
       });
+
       hideLoadMore();
       form.reset();
       return;
